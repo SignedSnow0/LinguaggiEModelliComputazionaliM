@@ -237,6 +237,14 @@ Inoltre esiste una forma estesa della BNF chiamata EBNF (Extended Backus-Naur Fo
 \<sum\>:= \<num\> { (+ | -) \<num\> }\
 \<num\>:= { digit }\
 \<digit\>:=0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+=== Pumping Lemma
+Il pumping lemma dà una condizione necessaria ma non sufficente perchèun linguaggio sia di tipo 2 o 3.\
+Il lemma punta a trovare stringhe di lunghezza infinita andando a cercare segmenti periodici all'interno della frase.\
+Allora se un linguaggio ha una regola che può essere "pompata" un numero infinito di volte si può andare ad escludere un'intera categoria di linguaggi.\
+Ad esempio un linguaggio
+$ A arrow.r A a = A={a^n} $
+non è sicuramente di tipo 2 grazie al pumping lemma.
+
 === Forme normali
 I linguaggi di tipo 2 possono essere riscritti in maniera da seguire queste proprietà:
 1. Ogni simbolo terminale o non compare in almeno una produzione.
@@ -272,3 +280,23 @@ Prendiamo però in considerazione la frase "13-4-5", queste due grammatiche port
   caption: [Albero di derivazione della frase "13-4-5" con grammatica ricorsiva destra.]
 )
 Questi due alberi, se valutati dal basso verso l'alto portano a: $(13-4)-5=9-5=4$ e $13-(4-5)=13-(-1)=14$, perciò, dato che le operazioni aritmentiche sono associative a sinistra, la grammatia ricorsiva a destra, pur essendo più semplice non riesce ad esprimere i corretti vincoli di costruzione della frase.\
+=== Espressioni regolari
+Le espressioni regolari sono un altro formalismo per descrivere linguaggi basato su tre regole:
+1. $epsilon$ è un'espressione regolare
+2. Dato un alfabeto $A$, ogni elemento $a in A$ è un espressione regolare
+3. Se $X,Y$ sono espressioni regolari, lo sono anche $X+Y, X dot Y, X^*$
+dove le operazioni sono definite come:
+$ 
+X+Y&={x|x in X or x in Y}\ 
+X dot Y &={x|x=a b, a in X and b in Y}\ 
+X^*&=union.big_(n=0)^oo X^n 
+$
+Come è possibile immaginare le espressioni regolari sono importanti grazie al seguente teorema:\
+I linguaggi descritti da espressioni regolari coincidono con i linguaggi generati da grammatiche regolari.\
+Prendiamo per esempio il seguente linguaggio:
+$ S arrow.r a | a + S | a - S $
+abbiamo tre simboli dell'alfabeto: $a, +, -$:
+1. Abbiamo allora tre regole $S=a$, $S = a+S$, $S = a-S$
+2. Raccogliamo le seconde due: $S=(a+ union a-)S$ e riaggiungendo la prima abbiamo $S=(a+ union a-)S + a$
+3.Raccogliamo la regola in una chiusura: $S=(a+ union a-)^* a$
+In altre sintassi la regola potrebbe essere scritta diversamente: $S=(a+|a-)^*a$
