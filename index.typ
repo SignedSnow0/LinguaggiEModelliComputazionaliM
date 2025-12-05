@@ -1,3 +1,5 @@
+#include "01 - Teoria della Computabilità/chapter.typ"
+
 = Modulo 2: Modelli computazionali
 == 1. Processi computazionali iterativi e ricorsivi
 Durante l'esecuzione di un programma l'elaboratore esegue calcoli in diversi modi a seconda dell'algoritmo scritto. Tra i metodi di iterazione più comuni si possono distinguere due tipi principali: l'iterazione e la ricorsione.
